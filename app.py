@@ -44,13 +44,21 @@ def edit_game_by_id(id):
     for index, game in enumerate(games):
         if game.get('id') == id:
             games[index].update(altered_game)
-            return jsonify(games[index])
+    return jsonify(games[index])
 
 
 @app.route('/games/', methods=['POST'])
 def add_new_game():
     new_game = request.get_json()
     games.append(new_game)
+    return jsonify(games)
+
+
+@app.route('/games/<int:id>', methods=['DELETE'])
+def delete_game(id):
+    for index, game in enumerate(games):
+        if game.get('id') == id:
+            del games[index]
     return jsonify(games)
 
 
