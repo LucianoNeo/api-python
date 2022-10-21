@@ -38,4 +38,13 @@ def get_game_by_id(id):
             return jsonify(game)
 
 
+@app.route('/games/<int:id>', methods=['PUT'])
+def edit_game_by_id(id):
+    altered_game = request.get_json()
+    for index, game in enumerate(games):
+        if game.get('id') == id:
+            games[index].update(altered_game)
+            return jsonify(games[index])
+
+
 app.run(port=5000, host='localhost', debug=True)
