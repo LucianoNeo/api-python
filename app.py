@@ -47,4 +47,11 @@ def edit_game_by_id(id):
             return jsonify(games[index])
 
 
+@app.route('/games/', methods=['POST'])
+def add_new_game():
+    new_game = request.get_json()
+    games.append(new_game)
+    return jsonify(games)
+
+
 app.run(port=5000, host='localhost', debug=True)
